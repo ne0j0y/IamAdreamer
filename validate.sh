@@ -36,7 +36,13 @@ ls -1a $a*gz | awk -F"_" '{print $3}' | awk -F"." '{print $1}'| awk 'NR == 1 || 
 
 ### finding the missing sequence
 echo "Missing Files for the file type "$a":" >> FILE_STATS.txt
-ls -1a $a*gz | awk -F"_" '{print $3}' | awk -F"." '{print $1}'|awk -v p="$finseq" '$1!=p+1{print p+1"-"$1-1}{p=$1;print "No Missing Files"}' >> FILE_STATS.txt
+
+vMiss=$(ls -1a $a*gz | awk -F"_" '{print $3}' | awk -F"." '{print $1}'|awk -v p="$finseq" '$1!=p+1{print p+1"-"$1-1}{p=$1}') 
+if [ -z "$vMiss" ]; then
+	echo "No Missing Files" >> FILE_STATS.txt
+else
+	echo $vMiss >> FILE_STATS.txt
+fi
 
 echo "######################################################################################" >> FILE_STATS.txt
 
