@@ -1,5 +1,0 @@
-hello i am entering to the world of github
-
-This is the new line
-
-I want to compare the changes between master and mybranch
