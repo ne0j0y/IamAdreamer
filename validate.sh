@@ -87,10 +87,10 @@ if [ "$vCurrFinSeq" -eq "$finseq" ] && [ "$vCurrTotFiles" -eq "$totfiles" ]; the
 else
 	if [ $a ==  "CNUM" ]; then
 
-		vMiss=$(ls -1a $a*DAT | awk -F"_" '{print $5}' | awk -F"." '{print $1}'| awk -v p="$finseq" '$1!=p+1 && $1>p {print p+1"-"$1-1}{p=$1}') #### Handled the missing sequences in case of old files by adding $1 > p
+		vMiss=$(ls -1a $a*DAT | awk -F"_" '{print $5}' | awk -F"." '{print $1}'| awk -v min="$finseq" 'BEGIN{p=min} $1!=p+1 && $1>min {print p+1"-"$1-1}{if ($1>min) p=$1}') #### Handled the missing sequences in case of old files by adding $1 > p
 
 	else
-		vMiss=$(ls -1a $a*gz | awk -F"_" '{print $3}' | awk -F"." '{print $1}'|awk -v p="$finseq" '$1!=p+1 && $1>p {print p+1"-"$1-1}{p=$1}') #### Handled the missing sequences in case of old files by adding $1 > p 
+		vMiss=$(ls -1a $a*gz | awk -F"_" '{print $3}' | awk -F"." '{print $1}'|awk -v min="$finseq" 'BEGIN{p=min} $1!=p+1 && $1>min {print p+1"-"$1-1}{if ($1>min) p=$1}') #### Handled the missing sequences in case of old files by adding $1 > p 
 	fi
 	if [ -z "$vMiss" ]; then
 		echo "No Missing Files" >> FILE_STATS.txt
