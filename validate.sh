@@ -41,14 +41,27 @@ fi
 echo $vCurrTotFiles >> FILE_STATS.txt
 
 
-### finding the starting sequence
+### finding the starting sequence. If the missing files from the previous run are present they will not be considered for finding the starting sequence.
 
 echo "Starting Sequence for the file type "$a":" >> FILE_STATS.txt
-if [ $a == "CNUM" ]; then
 
-	ls -1a $a*DAT | awk -F"_" '{print $5}' |awk -F"." '{print $1}'| awk 'NR == 1 || $1 < min {line = $0; min = $1}END{print line}' >> FILE_STATS.txt
+
+if [ "$vCurrFinSeq" -eq "$finseq" ] && [ "$vCurrTotFiles" -eq "$totfiles" ]; then   ##### To handle multiple runs with the same set of files.
+
+        vSrchFileFirstSeq="Starting Sequence for the file type "$a
+        vStartSeq=$(awk -v serstr="$vSrchFileFirstSeq" '$0 ~ serstr {getline; print}' FILE_STATS.txt.tmp)
+        echo $vStartSeq >> FILE_STATS.txt
 else
-	ls -1a $a*gz | awk -F"_" '{print $3}' | awk -F"." '{print $1}'| awk 'NR == 1 || $1 < min {line = $0; min = $1}END{print line}' >> FILE_STATS.txt
+
+	if [ $a == "CNUM" ]; then
+
+		vCurrStartSeq=$(ls -1a $a*DAT | awk -F"_" '{print $5}' |awk -F"." '{print $1}'| awk -v preSeq="$finseq" 'BEGIN{pVal=preSeq;mVal=999999} $1 >= pVal && $1 <= mVal {line = $0; mVal = $1}END{print line}')
+	else
+		vCurrStartSeq=$(ls -1a $a*gz | awk -F"_" '{print $3}' | awk -F"." '{print $1}'| awk -v preSeq="$finseq" 'BEGIN{pVal=preSeq;mVal=999999} $1 >= pVal && $1 <= mVal {line = $0; mVal = $1}END{print line}') 
+	fi
+
+	echo $vCurrStartSeq >> FILE_STATS.txt
+
 fi
 
 ### finding the ending sequence
@@ -74,11 +87,10 @@ if [ "$vCurrFinSeq" -eq "$finseq" ] && [ "$vCurrTotFiles" -eq "$totfiles" ]; the
 else
 	if [ $a ==  "CNUM" ]; then
 
-		vMiss=$(ls -1a $a*DAT | awk -F"_" '{print $5}' | awk -F"." '{print $1}'| awk -v p="$finseq" '$1!=p+1{print p+1"-"$1-1}{p=$1}')
+		vMiss=$(ls -1a $a*DAT | awk -F"_" '{print $5}' | awk -F"." '{print $1}'| awk -v p="$finseq" '$1!=p+1 && $1>p {print p+1"-"$1-1}{p=$1}') #### Handled the missing sequences in case of old files by adding $1 > p
 
 	else
-
-		vMiss=$(ls -1a $a*gz | awk -F"_" '{print $3}' | awk -F"." '{print $1}'|awk -v p="$finseq" '$1!=p+1{print p+1"-"$1-1}{p=$1}') 
+		vMiss=$(ls -1a $a*gz | awk -F"_" '{print $3}' | awk -F"." '{print $1}'|awk -v p="$finseq" '$1!=p+1 && $1>p {print p+1"-"$1-1}{p=$1}') #### Handled the missing sequences in case of old files by adding $1 > p 
 	fi
 	if [ -z "$vMiss" ]; then
 		echo "No Missing Files" >> FILE_STATS.txt
