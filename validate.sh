@@ -111,5 +111,5 @@ fi
 
 done
 
-echo "File Stats for today" | mail -a FILE_STATS.txt -s "File Stats_$(date)" marika.hager@optus.com.au marika.hager@optiva.com neo.joy@optiva.com
+echo "File Stats for today" | mail -a FILE_STATS.txt -s "File Stats_$(date)" marika.hager@optus.com.au Shonali.Patil@optus.com.au marika.hager@optiva.com neo.joy@optiva.com
 rm FILE_STATS.txt.tmp
