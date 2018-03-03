@@ -59,7 +59,7 @@ status=$?
 
 if [ $status -eq 0 ];then
 
-        echo " File stats generated" >>
+        echo " File stats generated" 
 else
 
         echo "File Stats not generated. Manual check required"
