@@ -54,6 +54,20 @@ fi
 
 }
 
+
+run_collector()
+{
+echo "Proceed with running collector process on $1 File (y/n):"
+read vYesno
+
+if [ $vYesno == 'y' ]; then
+
+	ibCollect -d -e $2
+fi
+}
+
+
+move_files CNUM /opt/redknee/home/plt76p1/inbill/ldr
 move_files 560_SDR /opt/redknee/home/plt76p1/inbill/ldr/sdr/560
 move_files 580_SDR /opt/redknee/home/plt76p1/inbill/ldr/sdr/580
 move_files 570_SDR /opt/redknee/home/plt76p1/inbill/ldr/sdr/570/original/done/tmp
@@ -62,11 +76,12 @@ move_files 610_SDR /opt/redknee/home/plt76p1/inbill/ldr/sdr/610/original/done/tm
 move_files 613_SDR /opt/redknee/home/plt76p1/inbill/ldr/sdr/613/original/done/tmp
 move_files 620_SDR /opt/redknee/home/plt76p1/inbill/ldr/sdr/620/original/done/tmp
 
-ibCollect -d -e /opt/redknee/home/plt76p1/inbill/ldr/sdr/sdrTmpCol570.xml
-ibCollect -d -e /opt/redknee/home/plt76p1/inbill/ldr/sdr/sdrTmpCol620.xml
-ibCollect -d -e /opt/redknee/home/plt76p1/inbill/ldr/sdr/sdrTmpCol610.xml
-ibCollect -d -e /opt/redknee/home/plt76p1/inbill/ldr/sdr/sdrTmpCol590.xml
-ibCollect -d -e /opt/redknee/home/plt76p1/inbill/ldr/sdr/sdrTmpCol613.xml
+run_collector 570_SDR /opt/redknee/home/plt76p1/inbill/ldr/sdr/sdrTmpCol570.xml
+run_collector 620_SDR /opt/redknee/home/plt76p1/inbill/ldr/sdr/sdrTmpCol620.xml
+run_collector 610_SDR /opt/redknee/home/plt76p1/inbill/ldr/sdr/sdrTmpCol610.xml
+run_collector 590_SDR /opt/redknee/home/plt76p1/inbill/ldr/sdr/sdrTmpCol590.xml
+run_collector 613_SDR /opt/redknee/home/plt76p1/inbill/ldr/sdr/sdrTmpCol613.xml
+
 
 move_files 560_CDR /opt/redknee/home/plt76p1/inbill/cdr/560/original/done/tmp
 move_files 570_CDR /opt/redknee/home/plt76p1/inbill/cdr/570/original/done/tmp
@@ -75,10 +90,12 @@ move_files 590_CDR /opt/redknee/home/plt76p1/inbill/cdr/590/original/done/tmp
 move_files 610_CDR /opt/redknee/home/plt76p1/inbill/cdr/610/original/done/tmp
 move_files 620_CDR /opt/redknee/home/plt76p1/inbill/cdr/620/original/done/tmp
 
-ibCollect -d -e /opt/redknee/home/plt76p1/inbill/cdr/cdrTmpCol570.xml
-ibCollect -d -e /opt/redknee/home/plt76p1/inbill/cdr/cdrTmpCol580.xml
-ibCollect -d -e /opt/redknee/home/plt76p1/inbill/cdr/cdrTmpCol590.xml
-ibCollect -d -e /opt/redknee/home/plt76p1/inbill/cdr/cdrTmpCol620.xml
-ibCollect -d -e /opt/redknee/home/plt76p1/inbill/cdr/cdrTmpCol610.xml
-ibCollect -d -e /opt/redknee/home/plt76p1/inbill/cdr/cdrTmpCol560.xml
+
+run_collector 570_CDR /opt/redknee/home/plt76p1/inbill/cdr/cdrTmpCol570.xml
+run_collector 580_CDR /opt/redknee/home/plt76p1/inbill/cdr/cdrTmpCol580.xml
+run_collector 590_CDR /opt/redknee/home/plt76p1/inbill/cdr/cdrTmpCol590.xml
+run_collector 620_CDR /opt/redknee/home/plt76p1/inbill/cdr/cdrTmpCol620.xml
+run_collector 610_CDR /opt/redknee/home/plt76p1/inbill/cdr/cdrTmpCol610.xml
+run_collector 560_CDR /opt/redknee/home/plt76p1/inbill/cdr/cdrTmpCol560.xml
+
 
