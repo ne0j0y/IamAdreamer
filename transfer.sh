@@ -1,20 +1,5 @@
 #!/bin/ksh
 
-cd /opt/redknee/home/plt76p1/mngdservSFTP
-
-/opt/redknee/home/plt76p1/mngdservSFTP/validate.sh
-
-status=$?
-
-if [ $status -eq 0 ];then
-
-	echo " File stats generated" >> 
-else
-
-	echo "File Stats not generated. Manual check required"
-	
-fi
-
 move_files()
 {
 
@@ -65,6 +50,21 @@ if [ $vYesno == 'y' ]; then
 	ibCollect -d -e $2
 fi
 }
+
+cd /opt/redknee/home/plt76p1/mngdservSFTP
+
+/opt/redknee/home/plt76p1/mngdservSFTP/validate.sh
+
+status=$?
+
+if [ $status -eq 0 ];then
+
+        echo " File stats generated" >>
+else
+
+        echo "File Stats not generated. Manual check required"
+
+fi
 
 
 move_files CNUM /opt/redknee/home/plt76p1/inbill/ldr
