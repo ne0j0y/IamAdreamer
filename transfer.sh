@@ -59,12 +59,14 @@ move_files 580_SDR /opt/redknee/home/plt76p1/inbill/ldr/sdr/580
 move_files 570_SDR /opt/redknee/home/plt76p1/inbill/ldr/sdr/570/original/done/tmp
 move_files 590_SDR /opt/redknee/home/plt76p1/inbill/ldr/sdr/590/original/done/tmp
 move_files 610_SDR /opt/redknee/home/plt76p1/inbill/ldr/sdr/610/original/done/tmp
+move_files 613_SDR /opt/redknee/home/plt76p1/inbill/ldr/sdr/613/original/done/tmp
 move_files 620_SDR /opt/redknee/home/plt76p1/inbill/ldr/sdr/620/original/done/tmp
 
 ibCollect -d -e /opt/redknee/home/plt76p1/inbill/ldr/sdr/sdrTmpCol570.xml
 ibCollect -d -e /opt/redknee/home/plt76p1/inbill/ldr/sdr/sdrTmpCol620.xml
 ibCollect -d -e /opt/redknee/home/plt76p1/inbill/ldr/sdr/sdrTmpCol610.xml
 ibCollect -d -e /opt/redknee/home/plt76p1/inbill/ldr/sdr/sdrTmpCol590.xml
+ibCollect -d -e /opt/redknee/home/plt76p1/inbill/ldr/sdr/sdrTmpCol613.xml
 
 move_files 560_CDR /opt/redknee/home/plt76p1/inbill/cdr/560/original/done/tmp
 move_files 570_CDR /opt/redknee/home/plt76p1/inbill/cdr/570/original/done/tmp
