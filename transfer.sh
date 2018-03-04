@@ -82,7 +82,7 @@ if [ $vFreeSpace -gt 15 ];  then
 	move_files 620_SDR /opt/redknee/home/plt76p1/inbill/ldr/sdr/620/original/done/tmp
 fi
 
-if [ $vFreeSpace -gt 60 ]; then
+if [ $vFreeSpace -gt 15 ]; then
 
 	run_collector 570_SDR /opt/redknee/home/plt76p1/inbill/ldr/sdr/sdrTmpCol570.xml
 	run_collector 620_SDR /opt/redknee/home/plt76p1/inbill/ldr/sdr/sdrTmpCol620.xml
