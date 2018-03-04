@@ -51,6 +51,9 @@ if [ $vYesno == 'y' ]; then
 fi
 }
 
+vFreeSpace=$(df -B G | grep "/opt" |awk '{print $4}')
+vFreeSpace="${vFreeSpace//G}"
+
 cd /opt/redknee/home/plt76p1/mngdservSFTP
 
 /opt/redknee/home/plt76p1/mngdservSFTP/validate.sh
@@ -68,34 +71,42 @@ fi
 
 
 move_files CNUM /opt/redknee/home/plt76p1/inbill/ldr
-move_files 560_SDR /opt/redknee/home/plt76p1/inbill/ldr/sdr/560
-move_files 580_SDR /opt/redknee/home/plt76p1/inbill/ldr/sdr/580
-move_files 570_SDR /opt/redknee/home/plt76p1/inbill/ldr/sdr/570/original/done/tmp
-move_files 590_SDR /opt/redknee/home/plt76p1/inbill/ldr/sdr/590/original/done/tmp
-move_files 610_SDR /opt/redknee/home/plt76p1/inbill/ldr/sdr/610/original/done/tmp
-move_files 613_SDR /opt/redknee/home/plt76p1/inbill/ldr/sdr/613/original/done/tmp
-move_files 620_SDR /opt/redknee/home/plt76p1/inbill/ldr/sdr/620/original/done/tmp
 
-run_collector 570_SDR /opt/redknee/home/plt76p1/inbill/ldr/sdr/sdrTmpCol570.xml
-run_collector 620_SDR /opt/redknee/home/plt76p1/inbill/ldr/sdr/sdrTmpCol620.xml
-run_collector 610_SDR /opt/redknee/home/plt76p1/inbill/ldr/sdr/sdrTmpCol610.xml
-run_collector 590_SDR /opt/redknee/home/plt76p1/inbill/ldr/sdr/sdrTmpCol590.xml
-run_collector 613_SDR /opt/redknee/home/plt76p1/inbill/ldr/sdr/sdrTmpCol613.xml
+if [ $vFreeSpace -gt 15 ];  then
+	move_files 560_SDR /opt/redknee/home/plt76p1/inbill/ldr/sdr/560
+	move_files 580_SDR /opt/redknee/home/plt76p1/inbill/ldr/sdr/580
+	move_files 570_SDR /opt/redknee/home/plt76p1/inbill/ldr/sdr/570/original/done/tmp
+	move_files 590_SDR /opt/redknee/home/plt76p1/inbill/ldr/sdr/590/original/done/tmp
+	move_files 610_SDR /opt/redknee/home/plt76p1/inbill/ldr/sdr/610/original/done/tmp
+	move_files 613_SDR /opt/redknee/home/plt76p1/inbill/ldr/sdr/613/original/done/tmp
+	move_files 620_SDR /opt/redknee/home/plt76p1/inbill/ldr/sdr/620/original/done/tmp
+fi
 
+if [ $vFreeSpace -gt 60 ]; then
 
-move_files 560_CDR /opt/redknee/home/plt76p1/inbill/cdr/560/original/done/tmp
-move_files 570_CDR /opt/redknee/home/plt76p1/inbill/cdr/570/original/done/tmp
-move_files 580_CDR /opt/redknee/home/plt76p1/inbill/cdr/580/original/done/tmp
-move_files 590_CDR /opt/redknee/home/plt76p1/inbill/cdr/590/original/done/tmp
-move_files 610_CDR /opt/redknee/home/plt76p1/inbill/cdr/610/original/done/tmp
-move_files 620_CDR /opt/redknee/home/plt76p1/inbill/cdr/620/original/done/tmp
+	run_collector 570_SDR /opt/redknee/home/plt76p1/inbill/ldr/sdr/sdrTmpCol570.xml
+	run_collector 620_SDR /opt/redknee/home/plt76p1/inbill/ldr/sdr/sdrTmpCol620.xml
+	run_collector 610_SDR /opt/redknee/home/plt76p1/inbill/ldr/sdr/sdrTmpCol610.xml
+	run_collector 590_SDR /opt/redknee/home/plt76p1/inbill/ldr/sdr/sdrTmpCol590.xml
+	###run_collector 613_SDR /opt/redknee/home/plt76p1/inbill/ldr/sdr/sdrTmpCol613.xml
+fi
 
+if [ $vFreeSpace -gt 15 ];  then
+	move_files 560_CDR /opt/redknee/home/plt76p1/inbill/cdr/560/original/done/tmp
+	move_files 570_CDR /opt/redknee/home/plt76p1/inbill/cdr/570/original/done/tmp
+	move_files 580_CDR /opt/redknee/home/plt76p1/inbill/cdr/580/original/done/tmp
+	move_files 590_CDR /opt/redknee/home/plt76p1/inbill/cdr/590/original/done/tmp
+	move_files 610_CDR /opt/redknee/home/plt76p1/inbill/cdr/610/original/done/tmp
+	move_files 620_CDR /opt/redknee/home/plt76p1/inbill/cdr/620/original/done/tmp
+fi
 
-run_collector 570_CDR /opt/redknee/home/plt76p1/inbill/cdr/cdrTmpCol570.xml
-run_collector 580_CDR /opt/redknee/home/plt76p1/inbill/cdr/cdrTmpCol580.xml
-run_collector 590_CDR /opt/redknee/home/plt76p1/inbill/cdr/cdrTmpCol590.xml
-run_collector 620_CDR /opt/redknee/home/plt76p1/inbill/cdr/cdrTmpCol620.xml
-run_collector 610_CDR /opt/redknee/home/plt76p1/inbill/cdr/cdrTmpCol610.xml
-run_collector 560_CDR /opt/redknee/home/plt76p1/inbill/cdr/cdrTmpCol560.xml
+if [ $vFreeSpace -gt 60 ]; then
 
+	run_collector 570_CDR /opt/redknee/home/plt76p1/inbill/cdr/cdrTmpCol570.xml
+	run_collector 580_CDR /opt/redknee/home/plt76p1/inbill/cdr/cdrTmpCol580.xml
+	run_collector 590_CDR /opt/redknee/home/plt76p1/inbill/cdr/cdrTmpCol590.xml
+	run_collector 620_CDR /opt/redknee/home/plt76p1/inbill/cdr/cdrTmpCol620.xml
+	run_collector 610_CDR /opt/redknee/home/plt76p1/inbill/cdr/cdrTmpCol610.xml
+	run_collector 560_CDR /opt/redknee/home/plt76p1/inbill/cdr/cdrTmpCol560.xml
 
+fi
