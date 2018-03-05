@@ -50,8 +50,8 @@ if [ $vYesno == 'y' ]; then
 	ibCollect -d -e $2
 fi
 }
-
-vFreeSpace=$(df -B G | grep "/opt" |awk '{print $4}')
+echo "test"
+vFreeSpace=$(df -B G | grep "/opt" |awk '{print $3}')
 vFreeSpace="${vFreeSpace//G}"
 
 cd /opt/redknee/home/plt76p1/mngdservSFTP
@@ -88,7 +88,7 @@ if [ $vFreeSpace -gt 15 ]; then
 	run_collector 620_SDR /opt/redknee/home/plt76p1/inbill/ldr/sdr/sdrTmpCol620.xml
 	run_collector 610_SDR /opt/redknee/home/plt76p1/inbill/ldr/sdr/sdrTmpCol610.xml
 	run_collector 590_SDR /opt/redknee/home/plt76p1/inbill/ldr/sdr/sdrTmpCol590.xml
-	###run_collector 613_SDR /opt/redknee/home/plt76p1/inbill/ldr/sdr/sdrTmpCol613.xml
+	run_collector 613_SDR /opt/redknee/home/plt76p1/inbill/ldr/sdr/sdrTmpCol613.xml
 fi
 
 if [ $vFreeSpace -gt 15 ];  then
