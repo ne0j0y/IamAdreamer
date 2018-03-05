@@ -50,7 +50,7 @@ if [ $vYesno == 'y' ]; then
 	ibCollect -d -e $2
 fi
 }
-echo "test"
+
 vFreeSpace=$(df -B G | grep "/opt" |awk '{print $3}')
 vFreeSpace="${vFreeSpace//G}"
 
