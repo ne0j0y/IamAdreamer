@@ -17,7 +17,7 @@ column BUNDLE_ABBR format a10
 column BUNDLE_SVC_ID format a20
 spool daily_rec_stats.csv 
 prompt "-----------------------------------FRG Record Stats------------------------------";
-SELECT FRG_EVENT_SRC_KEY,SWI_ID,FRG_FILE_STATUS_CODE,SUM(converted_recs) AS "TOTAL_CONVERTED_RECS",SUM(loaded_recs) AS "TOTAL_LOADED_RECS",SUM(dup_recs) AS "TOTAL_DUPLICATE_RECS" FROM prd_frg_file_jrnl WHERE file_key >=(SELECT MIN(file_key) FROM prd_frg_file_jrnl WHERE trunc(first_submitted_dttm) >= (select trunc(sysdate,'mm') from dual)) GROUP BY frg_event_src_key, swi_id, frg_file_status_code;
+SELECT FRG_EVENT_SRC_KEY,SWI_ID,trunc(first_submitted_dttm) AS "DATE",FRG_FILE_STATUS_CODE,SUM(converted_recs) AS "TOTAL_CONVERTED_RECS",SUM(loaded_recs) AS "TOTAL_LOADED_RECS",SUM(dup_recs) AS "TOTAL_DUPLICATE_RECS" FROM prd_frg_file_jrnl WHERE file_key >=(SELECT MIN(file_key) FROM prd_frg_file_jrnl WHERE trunc(first_submitted_dttm) >= (select trunc(sysdate,'mm') from dual)) GROUP BY frg_event_src_key, swi_id,trunc(first_submitted_dttm), frg_file_status_code order by swi_id,trunc(first_submitted_dttm);
 
 prompt "-----------------------------------SDR Loader Stats------------------------------";
 
