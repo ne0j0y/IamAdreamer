@@ -1,6 +1,6 @@
 #!/bin/ksh
 
-cd /opt/redknee/home/rel77t5/inbill/ldr 
+cd /opt/redknee/home/plt76p1/inbill/ldr 
 
 vFile=$(ls -ltr CNUM*| tail -1 | awk '{print $9}')
 
