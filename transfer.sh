@@ -98,6 +98,7 @@ if [ $vFreeSpace -gt 15 ];  then
 	move_files 590_CDR /opt/redknee/home/plt76p1/inbill/cdr/590/original/done/tmp
 	move_files 610_CDR /opt/redknee/home/plt76p1/inbill/cdr/610/original/done/tmp
 	move_files 620_CDR /opt/redknee/home/plt76p1/inbill/cdr/620/original/done/tmp
+	move_files 613_CDR /opt/redknee/home/plt76p1/inbill/cdr/613/original/done/tmp 
 fi
 
 if [ $vFreeSpace -gt 60 ]; then
@@ -108,5 +109,7 @@ if [ $vFreeSpace -gt 60 ]; then
 	run_collector 620_CDR /opt/redknee/home/plt76p1/inbill/cdr/cdrTmpCol620.xml
 	run_collector 610_CDR /opt/redknee/home/plt76p1/inbill/cdr/cdrTmpCol610.xml
 	run_collector 560_CDR /opt/redknee/home/plt76p1/inbill/cdr/cdrTmpCol560.xml
+	run_collector 613_CDR /opt/redknee/home/plt76p1/inbill/cdr/cdrTmpCol613.xml
+
 
 fi
