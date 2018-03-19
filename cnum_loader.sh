@@ -86,7 +86,11 @@ echo $cnum_res
 
 if [ $cnum_res -eq 7 ] ; then
 
-echo "File not processed Successfully. Please check"
+echo "$vFile not loaded successfully. Check immediately" | mail -s "CNUM File Status" neo.joy@optiva.com nabakumar.b@optiva.com
+
+else
+
+echo "$vFile loaded successfully" | mail -s "CNUM File Status" neo.joy@optiva.com nabakumar.b@optiva.com
 
 fi	 
 
