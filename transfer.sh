@@ -113,3 +113,5 @@ if [ $vFreeSpace -gt 60 ]; then
 
 
 fi
+
+/opt/redknee/home/plt76p1/mngdservSFTP/cnum_loader.sh
