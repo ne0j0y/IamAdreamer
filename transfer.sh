@@ -114,4 +114,12 @@ if [ $vFreeSpace -gt 60 ]; then
 
 fi
 
+echo "Proceed with running CNUM Loader(y/n):"
+read vYesno
+
+if [ $vYesno == 'y' ]; then
+
 /opt/redknee/home/plt76p1/mngdservSFTP/cnum_loader.sh
+
+fi
+
